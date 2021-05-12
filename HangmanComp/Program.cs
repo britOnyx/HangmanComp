@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace HangmanComp
 {
@@ -17,24 +18,19 @@ namespace HangmanComp
         {
             storedWords = new List<string>();
             attempts = 0;
-            /*StreamReader txtFile = new StreamReader("words.txt");
 
-            Console.WriteLine(txtFile.ReadLine());*/
+
+           // file = bin/Debug/netscoreapp3.1/words.txt
+           string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"words.txt");
+
+            ReadFile(path);
 
             Console.WriteLine("Hangman");
             Console.WriteLine("You have 6 attempts!");
 
-            storedWords.Add("Test");
-            storedWords.Add("Happy");
-            storedWords.Add("Genes");
-            storedWords.Add("bye");
-            storedWords.Add("four");
-            storedWords.Add("ground");
-            storedWords.Add("generate");
-
             selectedWord = selectRandomWord(storedWords).ToLower();
-            
 
+            //Console.WriteLine("Ans: " + selectedWord + " Length: " + storedWords.Count);
 
             char[] guess = new char[selectedWord.Length];
 
@@ -117,6 +113,27 @@ namespace HangmanComp
 
         }
 
+        private static void ReadFile(string path)
+        {
+            //open text file
+            using(StreamReader sr = new StreamReader(path))
+            {
+                //read text file
+                sr.ReadLine();
+
+                //create variable to store textfile data
+                string word;
+
+                //while there is text in the document
+                //store the line into vairable
+                while((word = sr.ReadLine()) != null)
+                {
+                    //add to list and repeat
+                    storedWords.Add(word);
+                }
+            }
+            Console.WriteLine("Words Stored");
+        }
 
         private static String selectRandomWord(List<string> storedWords)
         {

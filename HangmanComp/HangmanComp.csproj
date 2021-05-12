@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="bin\Debug\" />
+    <None Include="bin\Debug\netcoreapp3.1\words.txt" />
   </ItemGroup>
 
 </Project>
