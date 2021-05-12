@@ -61,7 +61,7 @@ namespace HangmanComp
                         //display text
                         guess[j] = playerGuess;
                         numbcorrect++;
-                        Console.WriteLine("Correct :" + numbcorrect);
+                        
                         if (numbcorrect == (selectedWord.Length))
                         {
                             //exit loop
