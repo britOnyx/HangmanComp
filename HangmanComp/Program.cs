@@ -12,7 +12,6 @@ namespace HangmanComp
         private static List<String> storedWords;
 
         private static int attempts;
-        private static List<string> correctLetters;
 
         static void Main(string[] args)
         {
@@ -34,7 +33,7 @@ namespace HangmanComp
             storedWords.Add("generate");
 
             selectedWord = selectRandomWord(storedWords).ToLower();
-            //Console.WriteLine(selectedWord);
+            
 
 
             char[] guess = new char[selectedWord.Length];
@@ -42,54 +41,80 @@ namespace HangmanComp
             for (int p = 0; p < selectedWord.Length; p++)
                 guess[p] = '_' ;
 
-            bool flag = false;
             bool win = false;
-            int numbcorrect = 0;
+            bool matchedWord = false; //used to flag if the guess words matchs
+
+            int numbcorrect = 0; // used to count the number of correct letters
             while (attempts <6)
             {
                 Console.WriteLine("Attempts: " + attempts);
                 Console.WriteLine("Enter Character");
 
                 
-                char playerGuess = char.Parse(Console.ReadLine());
+                char playerGuess = char.Parse(Console.ReadLine().ToLower());
+
                 //go through each letter in the word
                 for (int j = 0; j < selectedWord.Length; j++)
                 {
                     //if the guess matches a letter in the word
                     if (playerGuess == selectedWord[j])
                     {
-                        //display text
+                        //add to the array
                         guess[j] = playerGuess;
-                        numbcorrect++;
-                        
+                        numbcorrect++; //increment characters correct
+
+                        //if all the characters have been guessed
                         if (numbcorrect == (selectedWord.Length))
                         {
                             //exit loop
                             attempts = 7;
+                            win = true; //notify you won the game
                         }
                     }
-                    else
+
+
+                    //if the selected words match
+                    if(selectedWord.Contains(playerGuess))
                     {
-                        flag = false;
+                        //set true
+                        matchedWord = true;
                     }
+                    
 
 
                 }
 
 
 
-
-                if(!flag)
+                //if flag == won 
+                if(win)
                 {
-                    attempts++;
+                    //display text
+                    Console.WriteLine("Game Over, You Win!");
                 }
-                Console.WriteLine(guess);
 
+                //if matched word hasnt been flagged 
+                if(!matchedWord)
+                {
+                    //increase attempt number
+                    attempts++;
+                   
+                }
+                
+
+                Console.WriteLine(guess); //display array
+
+                matchedWord = false; //reset flag
             }
 
-            
-            Console.WriteLine("Game Over!");
-            Console.WriteLine("Ans: " + selectedWord);
+            //if win flag hasnt been changed 
+            if(!win)
+            {
+                //display text
+                Console.WriteLine("Game Over, You Loose!");
+                Console.WriteLine("Ans: " + selectedWord);
+            }
+
         }
 
 
