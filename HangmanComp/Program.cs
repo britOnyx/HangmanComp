@@ -34,7 +34,7 @@ namespace HangmanComp
             storedWords.Add("generate");
 
             selectedWord = selectRandomWord(storedWords).ToLower();
-            //Console.WriteLine(selectedWord);
+            Console.WriteLine(selectedWord);
 
 
             char[] guess = new char[selectedWord.Length];
@@ -43,10 +43,14 @@ namespace HangmanComp
                 guess[p] = '_' ;
 
             bool flag = false;
+            bool win = false;
+            int numbcorrect = 0;
             while (attempts <6)
             {
                 Console.WriteLine("Attempts: " + attempts);
                 Console.WriteLine("Enter Character");
+
+                
                 char playerGuess = char.Parse(Console.ReadLine());
                 //go through each letter in the word
                 for (int j = 0; j < selectedWord.Length; j++)
@@ -56,14 +60,24 @@ namespace HangmanComp
                     {
                         //display text
                         guess[j] = playerGuess;
-                        
+                        numbcorrect++;
+                        Console.WriteLine("Correct :" + numbcorrect);
+                        if (numbcorrect == (selectedWord.Length))
+                        {
+                            //exit loop
+                            attempts = 7;
+                        }
                     }
                     else
                     {
                         flag = false;
                     }
 
+
                 }
+
+
+
 
                 if(!flag)
                 {
