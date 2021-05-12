@@ -34,7 +34,7 @@ namespace HangmanComp
             storedWords.Add("generate");
 
             selectedWord = selectRandomWord(storedWords).ToLower();
-            Console.WriteLine(selectedWord);
+            //Console.WriteLine(selectedWord);
 
 
             char[] guess = new char[selectedWord.Length];
