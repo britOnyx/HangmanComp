@@ -120,11 +120,13 @@ namespace HangmanComp
 
         private static String selectRandomWord(List<string> storedWords)
         {
-
+            //create random gen
             Random r = new Random();
 
+            //random number will be generated from 0 to length of stored words
             int position = r.Next(0, storedWords.Count);
 
+            //return a word using the random generator
             return storedWords[position];
         }
     }
